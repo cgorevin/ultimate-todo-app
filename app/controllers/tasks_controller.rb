@@ -8,13 +8,25 @@ class TasksController < ApplicationController
 
   def create; end
 
-  def new; end
+  def new
+    @tasks = Task.new
+  end
 
   def edit; end
 
   def update; end
 
-  def show; end
+  def show
+    render json: {
+      'hello': 'world',
+    }
+  end
 
   def destroy; end
+
+  private
+
+  def task_params
+    params.permit(:name)
+  end
 end
