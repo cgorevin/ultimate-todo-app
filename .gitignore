@@ -42,3 +42,6 @@ yarn-debug.log*
 
 # Ignore notes files
 /NOTES.md
+
+# Ignore Sorbet error log
+sorbet/rbi/hidden-definitions/errors.txt
