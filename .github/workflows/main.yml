@@ -5,10 +5,14 @@ on:
   - pull_request
 
 jobs:
-  check-bats-version:
+  run-test-suite:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install -g bats
-      - run: bats -v
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6.6'
+      - run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rspec spec
