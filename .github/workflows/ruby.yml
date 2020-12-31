@@ -1,11 +1,11 @@
-name: autobots-roll-out
+name: ruby
 
 on:
   - push
 
 jobs:
-  run-test-suite:
-    name: Running tests
+  test:
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
