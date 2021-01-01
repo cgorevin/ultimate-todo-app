@@ -1,0 +1,10 @@
+gem 'pronto'
+gem 'pronto-bundler_audit', require: false
+gem 'pronto-erb_lint', require: false
+gem 'pronto-json', require: false
+gem 'pronto-rails_best_practices', require: false
+gem 'pronto-rails_schema', require: false
+gem 'pronto-reek', require: false
+gem 'pronto-rubocop', require: false
+gem 'pronto-sorbet', require: false
+gem 'pronto-yamllint', require: false

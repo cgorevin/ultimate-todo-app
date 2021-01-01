@@ -1,16 +1,18 @@
-name: ruby
+name: Pronto
 
 on:
   - pull_request
 
 jobs:
-  test:
-    name: Tests
+  linters:
+    name: Linters
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Ruby 2.6.6
+      - run: |
+          git fetch --no-tags --prune --depth=10 origin +refs/heads/*:refs/remotes/origin/*
+      - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.6.6'
@@ -25,5 +27,7 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - name: Run tests
-        run: bundle exec rspec spec
+      - name: Run Pronto
+        run: |
+          PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" bundle exec pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
+
