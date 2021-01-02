@@ -4,9 +4,17 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :request do
-  context 'when POSTing a new task' do
-    it 'will return a "HELLO" message' do
-      expect(1 + 1).to eq(2)
+  # POST /tasks
+  describe 'POST /tasks' do
+    context 'when the request is valid' do
+      it 'returns a "hello" message and an 200 OK status' do
+        params = { name: 'Practice Spanish' }
+
+        post '/tasks', params: params
+
+        expect(response.body).to eq('hello')
+        expect(response.status).to eq(200)
+      end
     end
   end
 end
