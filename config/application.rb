@@ -9,6 +9,9 @@ Bundler.require(*Rails.groups)
 
 module UltimateTodo
   class Application < Rails::Application
+    # Set project to be API-only
+    config.api_only = true
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
