@@ -5,8 +5,7 @@ on:
 
 jobs:
   code_climate:
-    # How do I reference the result of a different workflow before running this one?
-    needs: [ test ]
+    needs: [ ruby ]
     name: Test Coverage
     runs-on: ubuntu-latest
     steps:
