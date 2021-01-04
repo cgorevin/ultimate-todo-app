@@ -7,27 +7,16 @@ jobs:
   linters:
     name: Linters
     runs-on: ubuntu-latest
+    env:
+      BUNDLE_GEMFILE: Gemfile.tools
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - run: |
-          git fetch --no-tags --prune --depth=10 origin +refs/heads/*:refs/remotes/origin/*
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.6.6'
-      - name: Ruby gem cache
-        uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.tools.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - name: Install gems
-        run: |
-          bundle config path vendor/bundle
-          bundle install --gemfile=Gemfile.tools --jobs 4 --retry 3
+          bundler-cache: true
       - name: Run Pronto
         run: |
-          PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN="${{ github.token }}" bundle exec pronto run -f github_status github_pr -c origin/${{ github.base_ref }}
-
+          PRONTO_PULL_REQUEST_ID="$(jq --raw-output .number "$GITHUB_EVENT_PATH")" PRONTO_GITHUB_ACCESS_TOKEN=${{ secrets.PRONTO_GITHUB_ACCESS_TOKEN }} bundle exec pronto run -f github_status github_pr -c origin/${{ github.base_ref }}

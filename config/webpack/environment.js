@@ -1,3 +1,6 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require('@rails/webpacker');
+const dotenv = require("dotenv");
 
-module.exports = environment
+dotenv.config({ path: ".env", silent: true }));
+
+module.exports = environment;
