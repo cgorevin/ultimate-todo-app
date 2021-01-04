@@ -1,3 +1,6 @@
+source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
 gem 'pronto'
 gem 'pronto-bundler_audit', require: false
 gem 'pronto-erb_lint', require: false
