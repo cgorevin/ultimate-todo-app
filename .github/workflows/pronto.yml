@@ -29,5 +29,6 @@ jobs:
           bundle install --gemfile=Gemfile.tools --jobs 4 --retry 3
       - name: Run Pronto
         run: |
+          git fetch
           bundle exec pronto run -c origin/master -f github_status -f github_pr_review --exit-code
 
