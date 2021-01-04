@@ -1,0 +1,25 @@
+name: Code Climate
+
+on:
+  - pull_request
+
+jobs:
+  code_climate:
+    # How do I reference the result of a different workflow before running this one?
+    needs: [ test ]
+    name: Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Code Climate Coverage Action
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ENV['CC_TEST_REPORTER_ID']
+        with:
+          coverageCommand: npm run coverage
+          debug: true
