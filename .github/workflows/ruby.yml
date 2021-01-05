@@ -28,56 +28,17 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - name: Install Code Climate reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-      - name: Run tests
-        run: bundle exec rspec spec
       - name: Set ENV for Code Climate
         run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/$GITHUB_HEAD_REF:refs/remotes/origin/$GITHUB_HEAD_REF
           export GIT_BRANCH="$GITHUB_HEAD_REF"
           export GIT_COMMIT_SHA="$(git rev-parse origin/$GITHUB_HEAD_REF)"
-      - name: Download test coverage reporter
-        run: curl -L $CC_TEST_REPORTER_URL > cc-test-reporter
-      - name: Give test coverage reporter executable permissions
-        run: chmod +x cc-test-reporter
-      - name: Save coverage
-        run: ./cc-test-reporter format-coverage -t simplecov --output coverage/codeclimate.ultimate_todo.json
-      - uses: actions/upload-artifact@v1
-        with:
-          name: coverage-ruby-2.6.6
-          path: coverage/codeclimate.ultimate_todo.json
-  upload_coverage:
-    name: Upload Code Climate Test Coverage
-    runs-on: ubuntu-latest
-    env:
-      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-    needs: test
-    steps:
-      - name: Download test coverage reporter
-        run: curl -L $CC_TEST_REPORTER_URL > cc-test-reporter
-      - name: Give test coverage reporter executable permissions
-        run: chmod +x cc-test-reporter
-      - uses: actions/download-artifact@v1
-        with:
-          name: coverage-2.4.9
-          path: coverage
-      - uses: actions/download-artifact@v1
-        with:
-          name: coverage-2.5.7
-          path: coverage
-      - uses: actions/download-artifact@v1
-        with:
-          name: coverage-2.6.5
-          path: coverage
-      - uses: actions/download-artifact@v1
-        with:
-          name: coverage-2.7.0
-          path: coverage
-      - name: Aggregate & upload results to Code Climate
+      - name: Install Code Climate reporter
         run: |
-          ./cc-test-reporter sum-coverage coverage/codeclimate.*.json
-          ./cc-test-reporter upload-coverage
+          curl -L $CC_TEST_REPORTER_URL > cc-test-reporter
+          chmod +x cc-test-reporter
+      - name: Run tests
+        run: |
+          ./cc-test-reporter before-build
+          bundle exec rspec spec
+          ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
