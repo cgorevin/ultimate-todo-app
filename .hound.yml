@@ -1,0 +1,9 @@
+# https://houndci.com/configuration
+ruby:
+  config_file: .rubocop.yml
+eslint:
+  enabled: false
+jshint:
+  enabled: false
+scss:
+  enabled: false

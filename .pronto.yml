@@ -1,6 +1,5 @@
 all:
   exclude:
-    - 'sorbet/rbi/*'
     - spec/**/*'
 github:
   slug: cgorevin/ultimate_todo_app
