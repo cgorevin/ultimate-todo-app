@@ -45,7 +45,7 @@ jobs:
       - name: Give test coverage reporter executable permissions
         run: chmod +x cc-test-reporter
       - name: Save coverage
-        run: ./cc-test-reporter format-coverage --output coverage/codeclimate.ultimate_todo.json
+        run: ./cc-test-reporter format-coverage -t simplecov --output coverage/codeclimate.ultimate_todo.json
       - uses: actions/upload-artifact@v1
         with:
           name: coverage-ruby-2.6.6
