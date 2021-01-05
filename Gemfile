@@ -62,8 +62,8 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
-  gem 'rubocop', '~> 1.3'
-  gem 'rubocop-git', '~> 0.1.3'
+  gem 'rubocop'
+  gem 'rubocop-git'
   gem 'sorbet'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
