@@ -40,5 +40,5 @@ jobs:
       - name: Run tests
         run: |
           ./cc-test-reporter before-build
-          bundle exec rspec spec
+          bundle exec rspec
           ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
