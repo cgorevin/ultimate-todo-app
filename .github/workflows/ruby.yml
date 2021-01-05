@@ -30,7 +30,6 @@ jobs:
           bundle install --jobs 4 --retry 3
       - name: Install Code Climate reporter
         run: |
-          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
@@ -39,8 +38,8 @@ jobs:
       - name: Set ENV for Code Climate
         run: |
           git fetch --no-tags --prune --depth=1 origin +refs/heads/$GITHUB_HEAD_REF:refs/remotes/origin/$GITHUB_HEAD_REF
-          echo "::set-env name=GIT_BRANCH::$GITHUB_HEAD_REF"
-          echo "::set-env name=GIT_COMMIT_SHA::$(git rev-parse origin/$GITHUB_HEAD_REF)"
+          export GIT_BRANCH="$GITHUB_HEAD_REF"
+          export GIT_COMMIT_SHA="$(git rev-parse origin/$GITHUB_HEAD_REF)"
       - name: Download test coverage reporter
         run: curl -L $CC_TEST_REPORTER_URL > cc-test-reporter
       - name: Give test coverage reporter executable permissions
