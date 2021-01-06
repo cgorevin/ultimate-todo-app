@@ -10,8 +10,6 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       render json: 'hello'
-    else
-      render error: { error: 'Unable to create Task' }, status: 400
     end
   end
 
@@ -24,6 +22,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.permit(:name)
+    params.require(:task).permit(:name)
   end
 end
