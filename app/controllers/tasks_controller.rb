@@ -4,12 +4,19 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
+    render json: @tasks, status: 200
   end
 
   def create
     @task = Task.new(task_params)
     if @task.save
-      render json: 'hello'
+      render json: @task, status: :created
+    else
+      payload = {
+        error: 'Unable to save this task',
+        status: 400,
+      }
+      render json: payload, status: :bad_request
     end
   end
 
