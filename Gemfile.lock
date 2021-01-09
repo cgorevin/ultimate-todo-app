@@ -99,6 +99,10 @@ GEM
     concurrent-ruby (1.1.7)
     crack (0.4.4)
     crass (1.0.6)
+    database_cleaner (1.8.5)
+    database_cleaner-active_record (1.8.0)
+      activerecord
+      database_cleaner (~> 1.8.0)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -354,9 +358,11 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   colorize
+  database_cleaner-active_record
   devise (= 4.7.1)
   devise-encryptable
   dotenv-rails
+  factory_bot
   factory_bot_rails
   faker
   httparty

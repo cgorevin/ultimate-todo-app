@@ -12,11 +12,7 @@ class TasksController < ApplicationController
     if @task.save
       render json: @task, status: :created
     else
-      payload = {
-        error: 'Unable to save this task',
-        status: 400,
-      }
-      render json: payload, status: :bad_request
+      render json: @task.errors, status: :unprocessable_entity
     end
   end
 

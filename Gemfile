@@ -38,13 +38,14 @@ gem 'colorize'
 gem 'devise', '4.7.1'
 gem 'devise-encryptable'
 gem 'dotenv-rails'
+gem 'factory_bot'
 gem 'factory_bot_rails', require: false
 gem 'faker', require: false
 gem 'httparty'
 gem 'pundit'
-gem 'sorbet-runtime'
 gem 'rest-client', '2.0.1'
 gem 'rspec', '3.8.0'
+gem 'sorbet-runtime'
 gem 'stronger_parameters'
 gem 'will_paginate', '~> 3.1.0'
 
@@ -72,6 +73,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'database_cleaner-active_record'
   gem 'rails-controller-testing', '~> 1.0.4'
   gem 'rspec-rails', '3.8.0'
   gem 'selenium-webdriver'
