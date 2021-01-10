@@ -1,10 +1,16 @@
 # https://houndci.com/configuration
-ruby:
+rubocop:
   enabled: true
-  config_file: .rubocop.yml
+  version: 1.5.2
 eslint:
   enabled: false
 jshint:
   enabled: false
 scss:
   enabled: false
+flog:
+  enabled: true
+reek:
+  enabled: true
+erblint:
+  enabled: true
