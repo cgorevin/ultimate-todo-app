@@ -28,17 +28,10 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      - name: Set ENV for Code Climate
-        run: |
-          git fetch --no-tags --prune --depth=1 origin +refs/heads/$GITHUB_HEAD_REF:refs/remotes/origin/$GITHUB_HEAD_REF
-          export GIT_BRANCH="$GITHUB_HEAD_REF"
-          export GIT_COMMIT_SHA="$(git rev-parse origin/$GITHUB_HEAD_REF)"
-      - name: Install Code Climate reporter
-        run: |
-          curl -L $CC_TEST_REPORTER_URL > cc-test-reporter
-          chmod +x cc-test-reporter
-      - name: Run tests
-        run: |
-          ./cc-test-reporter before-build
-          bundle exec rspec
-          ./cc-test-reporter after-build --exit-code $?
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: bundle exec rspec spec
+          debug: true
