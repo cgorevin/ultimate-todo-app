@@ -3,9 +3,6 @@ name: Ruby
 on:
   - pull_request
 
-env:
-  CC_TEST_REPORTER_URL: https://codeclimate.com/downloads/test-reporter/test-reporter-0.7.0-linux-amd64
-
 jobs:
   test:
     name: Tests
@@ -34,4 +31,5 @@ jobs:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
           coverageCommand: bundle exec rspec spec
+          coverageLocations: ${{github.workspace}}/coverage/simplecov.info:simplecov
           debug: true

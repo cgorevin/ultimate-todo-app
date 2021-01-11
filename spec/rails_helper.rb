@@ -2,6 +2,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'factory_bot_rails'
+require 'simplecov'
 
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -24,6 +25,7 @@ require 'rspec/rails'
 # require only the support files necessary.
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+SimpleCov.start 'rails'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.

@@ -78,7 +78,7 @@ group :test do
   gem 'rspec-rails', '3.8.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'simplecov', require: false
+  gem 'simplecov'
   gem 'vcr'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'

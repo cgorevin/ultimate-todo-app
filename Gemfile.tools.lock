@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.0)
+    activesupport (6.1.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -9,11 +9,13 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    brakeman (4.10.1)
     bundler-audit (0.7.0.1)
       bundler (>= 1.2.0, < 3)
       thor (>= 0.18, < 2)
     code_analyzer (0.5.2)
       sexp_processor
+    colorize (0.8.1)
     concurrent-ruby (1.1.7)
     erubis (2.7.0)
     faraday (1.3.0)
@@ -21,6 +23,14 @@ GEM
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
     faraday-net_http (1.0.0)
+    fasterer (0.8.3)
+      colorize (~> 0.7)
+      ruby_parser (>= 3.14.1)
+    flay (2.12.1)
+      erubis (~> 2.7.0)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.0)
+      sexp_processor (~> 4.0)
     gitlab (4.17.0)
       httparty (~> 0.18)
       terminal-table (~> 1.5, >= 1.5.1)
@@ -33,13 +43,14 @@ GEM
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2020.1104)
-    minitest (5.14.2)
+    minitest (5.14.3)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     octokit (4.20.0)
       faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
     oj (2.18.5)
+    path_expander (1.1.0)
     poper (0.2.3)
       rugged (~> 0.23, >= 0.23.0)
       thor (~> 0.20.0)
@@ -50,9 +61,18 @@ GEM
       rainbow (>= 2.2, < 4.0)
       rugged (~> 0.24, >= 0.23.0)
       thor (~> 0.20.0)
+    pronto-brakeman (0.10.0)
+      brakeman (>= 3.2.0)
+      pronto (~> 0.10.0)
     pronto-bundler_audit (0.6.0)
       bundler-audit (~> 0)
       pronto (~> 0)
+    pronto-fasterer (0.10.0)
+      fasterer (~> 0.3, >= 0.3.0)
+      pronto (~> 0.10.0)
+    pronto-flay (0.10.0)
+      flay (~> 2.8)
+      pronto (~> 0.10.0)
     pronto-json (0.1.5)
       oj (~> 2.0)
       pronto (~> 0.9)
@@ -62,6 +82,8 @@ GEM
     pronto-rails_best_practices (0.10.0)
       pronto (~> 0.10.0)
       rails_best_practices (~> 1.16, >= 1.15.0)
+    pronto-rails_data_schema (0.1.0)
+      pronto (~> 0.10.0)
     pronto-rails_schema (0.10.0)
       pronto (~> 0.10.0)
     pronto-sorbet (0.2.0)
@@ -82,14 +104,16 @@ GEM
     require_all (3.0.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.2)
-    rugged (0.99.0)
+    ruby_parser (3.15.1)
+      sexp_processor (~> 4.9)
+    rugged (0.28.5)
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
-    sexp_processor (4.15.1)
-    sorbet (0.5.6189)
-      sorbet-static (= 0.5.6189)
-    sorbet-static (0.5.6189-universal-darwin-14)
+    sexp_processor (4.15.2)
+    sorbet (0.5.6205)
+      sorbet-static (= 0.5.6205)
+    sorbet-static (0.5.6205-universal-darwin-14)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thor (0.20.3)
@@ -103,13 +127,18 @@ PLATFORMS
 
 DEPENDENCIES
   pronto
+  pronto-brakeman
   pronto-bundler_audit
+  pronto-fasterer
+  pronto-flay
   pronto-json
   pronto-poper
   pronto-rails_best_practices
+  pronto-rails_data_schema
   pronto-rails_schema
   pronto-sorbet
   pronto-yamllint
+  rugged (~> 0.28.5)
 
 BUNDLED WITH
    1.17.2
