@@ -1,0 +1,47 @@
+name: Ruby CI
+
+on:
+  - pull_request
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      #   with:
+      #     fetch-depth: 0
+      # - name: Fetch origin main
+      #   run: git fetch origin main --depth=1
+      - name: Set up Ruby 2.6.6 
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.6.6'
+      - name: Ruby gem cache
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      # - name: Run Pronto linters
+      #   uses: adwerx/pronto-ruby@v2.8
+      #   with:
+      #     target: origin/main
+      #     runners: >-
+      #       rails_schema yamllint poper
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.PRONTO_GITHUB_ACCESS_TOKEN }}
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: bundle exec rspec spec
+          coverageLocations: ${{github.workspace}}/coverage/simplecov.info:simplecov
+          debug: true

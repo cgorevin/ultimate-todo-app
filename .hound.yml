@@ -1,0 +1,16 @@
+# https://houndci.com/configuration
+rubocop:
+  enabled: true
+  version: 1.5.2
+eslint:
+  enabled: false
+jshint:
+  enabled: false
+scss:
+  enabled: false
+flog:
+  enabled: true
+reek:
+  enabled: true
+erblint:
+  enabled: true

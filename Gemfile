@@ -62,8 +62,8 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
-  gem 'rubocop', '~> 1.3'
-  gem 'rubocop-git', '~> 0.1.3'
+  gem 'rubocop'
+  gem 'rubocop-git'
   gem 'sorbet'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -78,6 +78,7 @@ group :test do
   gem 'rspec-rails', '3.8.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
+  gem 'simplecov'
   gem 'vcr'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
