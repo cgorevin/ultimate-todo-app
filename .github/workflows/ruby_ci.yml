@@ -28,6 +28,7 @@ jobs:
       - name: Run Pronto linters
         uses: adwerx/pronto-ruby@v2.8
         with:
+          target: origin/main
           runners: >-
             rails_schema yamllint poper
         env:
