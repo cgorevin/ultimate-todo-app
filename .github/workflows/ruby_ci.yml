@@ -10,10 +10,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: 0
-      # - name: Fetch origin main
-      #   run: git fetch origin main --depth=1
+        with:
+          fetch-depth: 0
+      - name: Fetch origin main
+        run: git fetch origin main --depth=1
       - name: Set up Ruby 2.6.6 
         uses: actions/setup-ruby@v1
         with:
@@ -29,14 +29,14 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      # - name: Run Pronto linters
-      #   uses: adwerx/pronto-ruby@v2.8
-      #   with:
-      #     target: origin/main
-      #     runners: >-
-      #       rails_schema yamllint poper
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.PRONTO_GITHUB_ACCESS_TOKEN }}
+      - name: Run Pronto linters
+        uses: adwerx/pronto-ruby@v2.8
+        with:
+          target: origin/main
+          runners: >-
+            rails_schema yamllint poper
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
