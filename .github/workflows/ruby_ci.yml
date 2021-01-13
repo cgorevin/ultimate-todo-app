@@ -29,14 +29,14 @@ jobs:
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-      # - name: Run Pronto linters
-      #   uses: adwerx/pronto-ruby@v2.8
-      #   with:
-      #     target: origin/main
-      #     runners: >-
-      #       rails_schema yamllint poper
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.PRONTO_GITHUB_ACCESS_TOKEN }}
+      - name: Run Pronto linters
+        uses: adwerx/pronto-ruby@v2.8
+        with:
+          target: origin/main
+          runners: >-
+            rails_schema yamllint poper
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
