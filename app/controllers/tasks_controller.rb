@@ -4,7 +4,7 @@
 class TasksController < ApplicationController
   def index
     @tasks = Task.all
-    render json: @tasks, status: 200
+    render json: @tasks, status: :ok
   end
 
   def create
@@ -16,11 +16,20 @@ class TasksController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      render json: @task, status: :ok
+    else
+      render json: ErrorSerializer.serialize(@task.errors), status: :unprocessable_entity
+    end
+  end
 
-  def show; end
-
-  def destroy; end
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    render json: 'Deleted successfully', status: :no_content
+  end
 
   private
 
