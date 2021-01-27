@@ -45,3 +45,4 @@ yarn-debug.log*
 
 # Ignore Sorbet error log
 sorbet/rbi/hidden-definitions/errors.txt
+coverage
